@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
+import { firebaseAuth } from "../utils/firebase-config";
+import {
+	createUserWithEmailAndPassword,
+	onAuthStateChanged,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
 	const [getStarted, setGetStarted] = useState("");
 	const [passwd, setPasswd] = useState("none");
+	const [formValues, setFormValues] = useState({ email: "", password: "" });
+	let navigate = useNavigate();
 
-	function handleGetStarted(e) {
+	const handleGetStarted = (e) => {
 		e.preventDefault();
 		setGetStarted("none");
 		//show input for email and password
@@ -15,9 +23,34 @@ function Signup() {
 			"w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mt-2 mb-[0.125rem]";
 		document.getElementById("inputpasswd").className =
 			"w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mb-2 mb-[0.125rem] ml-[0.125rem]";
+	};
 
-		//Sign In button
-	}
+	const handleChange = (e) => {
+		setFormValues({
+			...formValues,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSignUp = async (e) => {
+		console.log(formValues);
+		createUserWithEmailAndPassword(
+			firebaseAuth,
+			formValues.email,
+			formValues.password
+		).then((user) => {
+			console.log(user);
+			console.log("After", formValues);
+		});
+		setFormValues({ email: "", password: "" });
+	};
+
+	onAuthStateChanged(firebaseAuth, (currentUser) => {
+		console.log(currentUser);
+		if (currentUser) {
+			navigate("/");
+		}
+	});
 
 	return (
 		<div>
@@ -44,6 +77,8 @@ function Signup() {
 								name="email"
 								placeholder="Email address"
 								id="inputemail"
+								value={formValues.email}
+								onChange={handleChange}
 							/>
 							<input
 								className="w-[70%] sm:w-[60%] lg:w-[30%] lg:h-12 h-10 pl-4 rounded-sm my-2"
@@ -52,6 +87,8 @@ function Signup() {
 								name="password"
 								placeholder="Password"
 								id="inputpasswd"
+								value={formValues.password}
+								onChange={handleChange}
 							/>
 							<button
 								onClick={handleGetStarted}
@@ -70,11 +107,11 @@ function Signup() {
 						</button>
 
 						<button
-							// onClick={handleGetStarted}
+							onClick={handleSignUp}
 							style={{ display: passwd }}
 							className="w-[4.5rem] sm:p-1 lg:p-[0.3rem] rounded-[0.22rem]  bg-red-600 mx-auto lg:hidde font-medium my-2 hover:bg-red-500  cursor-pointer"
 						>
-							Sign In
+							Sign Up
 						</button>
 					</div>
 				</div>

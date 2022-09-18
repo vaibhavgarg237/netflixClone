@@ -4,3 +4,5 @@ firebase
 react-icons
 redux
 tailwind-css
+
+Firebase for signup and other databases
