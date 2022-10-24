@@ -6,9 +6,7 @@ import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 
-//Make Navbar backgroundColor black on Scroll addonscroll event listener
-
-function Navbar() {
+function Navbar({ isScrolled }) {
   const links = [
     { name: "Home", link: "/" },
     { name: "TV Shows", link: "/TVshows" },
@@ -27,7 +25,11 @@ function Navbar() {
   });
 
   return (
-    <div className="flex m-3 mt-8 items-center text-black scroll">
+    <div
+      className={`flex m-3 mt-8 items-center text-white ${
+        isScrolled ? "bg-black" : ""
+      } `}
+    >
       <img
         src={Logo}
         className="mx-3 ml-16 w-28 sm:w-36 lg:w-40 "
