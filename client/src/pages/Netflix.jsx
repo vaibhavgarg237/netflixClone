@@ -4,9 +4,11 @@ import BackgroundImage from "../assets/home.jpg";
 import BackgroundImageTitle from "../assets/homeTitle.webp";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function Netflix() {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   window.onscroll = () => {
     setScrolled(window.scrollY === 0 ? false : true);
@@ -31,7 +33,12 @@ function Netflix() {
           />
 
           <div className="inline-flex relative bottom-[29rem] left-16 space-x-8 ">
-            <div className="PLAY flex h-12 w-44 bg-[#f0f0f0] hover:bg-[#8c8a8a] justify-center items-center rounded-md space-x-2 cursor-pointer">
+            <div
+              className="PLAY flex h-12 w-44 bg-[#f0f0f0] hover:bg-[#8c8a8a] justify-center items-center rounded-md space-x-2 cursor-pointer"
+              onClick={() => {
+                navigate("/player");
+              }}
+            >
               <FaPlay fontSize="1.6rem" />
               <span>Play</span>
             </div>

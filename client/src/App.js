@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Netflix from "./pages/Netflix";
 import Signup from "./pages/Signup";
+import Player from "./components/Player";
 import "./index.css";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/" element={<Netflix />} />
+        <Route exact path="/player" element={<Player />} />
       </Routes>
     </BrowserRouter>
   );
