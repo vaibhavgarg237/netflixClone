@@ -26,7 +26,7 @@ function Navbar({ isScrolled }) {
 
   return (
     <div
-      className={`flex m-3 mt-8 items-center text-white ${
+      className={`flex p-3 pt-5 items-center text-white ${
         isScrolled ? "bg-black" : ""
       } `}
     >
@@ -60,9 +60,9 @@ function Navbar({ isScrolled }) {
         <input
           type="text"
           placeholder="Search"
-          className={`border-none outline-none transition-all ease-out ${
-            !showSearch ? "w-0 " : "w-32 "
-          } `}
+          className={`border-none outline-none transition-all ease-out ml-1 ${
+            !isScrolled ? "bg-black" : ""
+          } h-8 rounded-md p-3 ${!showSearch ? "w-0 bg-transparent" : "w-40"} `}
           onMouseEnter={() => {
             setInputClicked(true);
           }}
@@ -75,7 +75,7 @@ function Navbar({ isScrolled }) {
           }}
         />
         <button
-          className="ml-8 mr-16"
+          className="ml-4 mr-16"
           onClick={() => {
             return signOut(firebaseAuth);
           }}
