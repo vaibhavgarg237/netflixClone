@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getGenres, getMovies } from "../store/index";
+import Slider from "../components/Slider";
 
 function Netflix() {
   const [scrolled, setScrolled] = useState(false);
@@ -65,6 +66,9 @@ function Netflix() {
           </div>
         </div>
       }
+      <div className="absolute top-[46.35rem] relativ botto-[26rem]">
+        <Slider movies={reduxStates.movies} />
+      </div>
     </div>
   );
 }
