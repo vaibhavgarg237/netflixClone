@@ -16,7 +16,10 @@ function CardSlider({ movie, title }) {
       className="flex"
     >
       {hover && (
-        <AiOutlineLeft fontSize="2rem" className="mt-48 absolute left-1" />
+        <AiOutlineLeft
+          fontSize="2rem"
+          className="mt-48 absolute left-1 text-white"
+        />
       )}
       <div className="flex flex-col">
         <h1 className="text-white  font-bold text-3xl mt-[5rem] mb-6">
@@ -33,7 +36,10 @@ function CardSlider({ movie, title }) {
         </div>
       </div>
       {hover && (
-        <AiOutlineRight fontSize="2rem" className="mt-48 absolute right-1" />
+        <AiOutlineRight
+          fontSize="2rem"
+          className="mt-48 mr-2 absolute right-1 text-white"
+        />
       )}
     </div>
   );

@@ -31,7 +31,7 @@ function Netflix() {
   };
 
   return (
-    <div className="bg-black">
+    <div className="bg-black relative">
       <div className="sticky top-0 z-10">
         <Navbar isScrolled={scrolled} />
       </div>
@@ -66,7 +66,7 @@ function Netflix() {
           </div>
         </div>
       }
-      <div className="absolute top-[46.35rem] relativ botto-[26rem]">
+      <div className="absolute top-[46.35rem] bg-black ">
         <Slider movies={reduxStates.movies} />
       </div>
     </div>
