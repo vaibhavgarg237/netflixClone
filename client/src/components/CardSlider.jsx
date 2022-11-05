@@ -5,6 +5,8 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 function CardSlider({ movie, title }) {
   const [hover, setHover] = useState(false);
 
+  const handleDirection = (direction) => {};
+
   return (
     <div
       onMouseEnter={() => {
@@ -13,15 +15,16 @@ function CardSlider({ movie, title }) {
       onMouseLeave={() => {
         setHover(false);
       }}
-      className="flex"
+      className="flex [ relative ]"
     >
       {hover && (
         <AiOutlineLeft
           fontSize="2rem"
           className="mt-48 absolute left-1 text-white"
+          onClick={handleDirection("left")}
         />
       )}
-      <div className="flex flex-col">
+      <div className="flex flex-col px-10">
         <h1 className="text-white  font-bold text-3xl mt-[5rem] mb-6">
           {title}
         </h1>
@@ -39,6 +42,7 @@ function CardSlider({ movie, title }) {
         <AiOutlineRight
           fontSize="2rem"
           className="mt-48 mr-2 absolute right-1 text-white"
+          onClick={handleDirection("right")}
         />
       )}
     </div>

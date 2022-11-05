@@ -8,7 +8,7 @@ function slider({ movies }) {
   };
 
   return (
-    <div className="ml-10 bg-back">
+    <div className="bg-back">
       <CardSlider movie={slicedMovies(0, 10)} title="Trending Now" />
       <CardSlider movie={slicedMovies(10, 20)} title="New Releases" />
       <CardSlider movie={slicedMovies(20, 30)} title="Blockbuster Movies" />

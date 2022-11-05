@@ -31,7 +31,7 @@ function Netflix() {
   };
 
   return (
-    <div className="bg-black relative">
+    <div className="bg-black relative overflow-x-clip">
       <div className="sticky top-0 z-10">
         <Navbar isScrolled={scrolled} />
       </div>
