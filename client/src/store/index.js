@@ -19,7 +19,7 @@ export const getGenres = createAsyncThunk("netflix/genres", async () => {
     `${TMBD_BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`
   );
 
-  console.log(genres);
+  // console.log(genres);
   return genres;
 });
 
@@ -51,7 +51,7 @@ const createMovieArr = async (genres, type) => {
       });
     }
   }
-  console.log(movies);
+  // console.log(movies);
   return movies;
 };
 

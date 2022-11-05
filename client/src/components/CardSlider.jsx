@@ -49,4 +49,4 @@ function CardSlider({ movie, title }) {
   );
 }
 
-export default CardSlider;
+export default React.memo(CardSlider);

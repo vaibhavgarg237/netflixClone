@@ -5,13 +5,11 @@ import { IoPlayCircleSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
-import { BsCheck } from "react-icons/bs";
 import Video from "../assets/StrangerThings.mp4";
-import Player from "./Player";
 
 function Card({ movie }) {
   const [hover, setHover] = useState(false);
-  const { id, name, image, genres } = movie;
+  const { name, image, genres } = movie;
   const navigate = useNavigate();
   return (
     <div
@@ -87,4 +85,4 @@ function Card({ movie }) {
   );
 }
 
-export default Card;
+export default React.memo(Card);

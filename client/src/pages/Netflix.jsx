@@ -18,12 +18,14 @@ function Netflix() {
   const reduxStates = useSelector((state) => state.netflix);
   useEffect(() => {
     dispatch(getGenres());
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (reduxStates.genresLoaded) {
       dispatch(getMovies({ type: "all" }));
     }
+    // eslint-disable-next-line
   }, [reduxStates.genresLoaded]);
 
   window.onscroll = () => {
