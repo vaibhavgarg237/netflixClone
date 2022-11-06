@@ -23,15 +23,21 @@ export const getGenres = createAsyncThunk("netflix/genres", async () => {
   return genres;
 });
 
-const createMovieArr = async (genres, type) => {
+const createMovieArr = async (genres, type, id = 0) => {
   const movies = [];
   for (let i = 1; movies.length < 60 && i < 10; i++) {
+    //all
+    let api_url = `${TMBD_BASE_URL}/trending/${type}/week?api_key=${API_KEY}&page=${i}`;
+
+    //for selected genres
+    if (id !== 0) {
+      api_url = `${TMBD_BASE_URL}/discover/${type}?api_key=${API_KEY}&page=${i}&with_genres=${id}`;
+    }
+
     const {
       data: { results },
-    } = await axios.get(
-      `${TMBD_BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${i}`
-    );
-
+    } = await axios.get(api_url);
+    // console.log(results, id);
     //filter results {contains movies}
     for (let j = 0; j < results.length; j++) {
       let genre_names = [];
@@ -42,16 +48,17 @@ const createMovieArr = async (genres, type) => {
           genre_names.push(name.name);
         }
       }
-
-      movies.push({
-        id: results[j].id,
-        name: results[j].title,
-        image: results[j].backdrop_path,
-        genres: genre_names,
-      });
+      if (results[j].backdrop_path !== null) {
+        movies.push({
+          id: results[j].id,
+          name: results[j].title,
+          image: results[j].backdrop_path,
+          genres: genre_names,
+        });
+      }
     }
   }
-  // console.log(movies);
+  console.log(movies, id);
   return movies;
 };
 
@@ -65,6 +72,17 @@ export const getMovies = createAsyncThunk(
   }
 );
 
+export const getDataByGenre = createAsyncThunk(
+  "netflix/genre",
+  async ({ genre, type }, thunkAPI) => {
+    const {
+      netflix: { genres },
+    } = thunkAPI.getState();
+    // console.log("*****", genre, type, genres, genreName, "******");
+    return createMovieArr(genres, type, genre);
+  }
+);
+
 const netflixSlice = createSlice({
   name: "netflix",
   initialState,
@@ -74,6 +92,9 @@ const netflixSlice = createSlice({
       state.genresLoaded = true;
     });
     builder.addCase(getMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+    builder.addCase(getDataByGenre.fulfilled, (state, action) => {
       state.movies = action.payload;
     });
   },
