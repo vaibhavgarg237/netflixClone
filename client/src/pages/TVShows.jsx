@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDataByGenre, getGenres } from "../store/index";
 import Slider from "../components/Slider";
 import SelectGenre from "../components/SelectGenre";
+import NotAvailable from "../components/NotAvailable";
 
-function Movies() {
+function TVShows() {
   const dispatch = useDispatch();
   const reduxStates = useSelector((state) => state.netflix);
   useEffect(() => {
@@ -15,23 +16,28 @@ function Movies() {
 
   useEffect(() => {
     if (reduxStates.genresLoaded) {
-      dispatch(getDataByGenre({ type: "movie" }));
+      dispatch(getDataByGenre({ type: "tv" }));
     }
     console.log(reduxStates.getDataByGenre);
     // eslint-disable-next-line
   }, [reduxStates.genresLoaded, reduxStates.getDataByGenre]);
 
   return (
-    <div className="bg-black overflow-xclip">
+    <div className="bg-black overflow-x-clip">
       <div className="sticky top-0 z-10 mb-10">
         <Navbar isScrolled={true} />
       </div>
       <div className="-mb-2 z-[150]">
-        <SelectGenre type="movie" />
+        <SelectGenre type="tv" />
       </div>
-      <Slider movies={reduxStates.movies} />
+
+      {reduxStates.movies.length > 0 ? (
+        <Slider movies={reduxStates.movies} />
+      ) : (
+        <NotAvailable />
+      )}
     </div>
   );
 }
 
-export default Movies;
+export default TVShows;

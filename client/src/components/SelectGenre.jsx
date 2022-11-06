@@ -8,6 +8,7 @@ function SelectGenre({ type }) {
 
   useEffect(() => {
     dispatch(getGenres());
+    // eslint-disable-next-line
   }, []);
 
   return (

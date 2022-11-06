@@ -48,10 +48,12 @@ const createMovieArr = async (genres, type, id = 0) => {
           genre_names.push(name.name);
         }
       }
+      console.log(results[j]);
       if (results[j].backdrop_path !== null) {
         movies.push({
           id: results[j].id,
-          name: results[j].title,
+          name:
+            results[j].title !== undefined ? results[j].title : results[j].name,
           image: results[j].backdrop_path,
           genres: genre_names,
         });
