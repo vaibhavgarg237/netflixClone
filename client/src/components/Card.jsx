@@ -1,16 +1,49 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
+import { BsCheck } from "react-icons/bs";
 import Video from "../assets/StrangerThings.mp4";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase-config";
+import axios from "axios";
 
-function Card({ movie }) {
+function Card({ movie, likedMovies }) {
+  const [email, setEmail] = useState(undefined);
+
   const [hover, setHover] = useState(false);
   const { name, image, genres } = movie;
   const navigate = useNavigate();
+  const [added, setAdded] = useState(false);
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) {
+      setEmail(currentUser.email);
+    } else {
+      navigate("/login");
+    }
+  });
+
+  const addToList = async () => {
+    try {
+      await axios
+        .post("http://localhost:5000/api/user/add", {
+          email,
+          data: movie,
+        })
+        .then((response) => {
+          // console.log(response);
+          if (response?.status === 200 && response.data?.result === 1) {
+            setAdded(true);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       onMouseEnter={() => {
@@ -66,9 +99,22 @@ function Card({ movie }) {
               <div className="hover:text-gray-500 px-1">
                 <RiThumbDownFill fontSize="2rem" title="Dislike" />
               </div>
-              <div className="hover:text-gray-500 px-1">
-                <AiOutlinePlus fontSize="2rem" title="Add to my list" />
-              </div>
+              {added ? (
+                <div className="hover:text-gray-500 px-1">
+                  <BsCheck fontSize="2rem" title="Remove from my list" />
+                </div>
+              ) : (
+                <div className="hover:text-gray-500 px-1">
+                  <AiOutlinePlus
+                    fontSize="2rem"
+                    title="Add to my list"
+                    onClick={() => {
+                      addToList();
+                    }}
+                  />
+                </div>
+              )}
+
               <div style={{ marginLeft: "auto" }}>
                 <BiChevronDown fontSize="2rem" title="More Info" />
               </div>

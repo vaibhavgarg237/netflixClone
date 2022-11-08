@@ -1,7 +1,7 @@
 import React from "react";
 import CardSlider from "./CardSlider";
 
-function slider({ movies }) {
+function Slider({ movies }) {
   const slicedMovies = (start, end) => {
     // console.log("///", start, end, "Movies", movies.slice(start, end), "///");
     return movies.slice(start, end);
@@ -35,4 +35,4 @@ function slider({ movies }) {
   );
 }
 
-export default slider;
+export default Slider;

@@ -5,12 +5,22 @@ import BackgroundImageTitle from "../assets/homeTitle.webp";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-import { getGenres, getMovies } from "../store/index";
+import { getGenres, getMovies, getUserLikedMovies } from "../store/index";
 import Slider from "../components/Slider";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase-config";
 
 function Netflix() {
+  const [email, setEmail] = useState(undefined); //getLikedMovies
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) {
+        setEmail(currentUser.email);
+      }
+    });
+  }, [email]);
+
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
 
@@ -18,6 +28,7 @@ function Netflix() {
   const reduxStates = useSelector((state) => state.netflix);
   useEffect(() => {
     dispatch(getGenres());
+    dispatch(getUserLikedMovies(email)); //getLikedMovies -> Now can use likedMovies anywhere using reduxStates.likedMovies
     // eslint-disable-next-line
   }, []);
 
