@@ -9,6 +9,8 @@ import Video from "../assets/StrangerThings.mp4";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeFromList } from "../store/index";
 
 function Card({ movie, init = false }) {
   const [email, setEmail] = useState(undefined);
@@ -42,6 +44,11 @@ function Card({ movie, init = false }) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const dispatch = useDispatch();
+  const remove = async () => {
+    dispatch(removeFromList(email, movie.id));
   };
 
   return (
@@ -101,7 +108,13 @@ function Card({ movie, init = false }) {
               </div>
               {added ? (
                 <div className="hover:text-gray-500 px-1">
-                  <BsCheck fontSize="2rem" title="Remove from my list" />
+                  <BsCheck
+                    fontSize="2rem"
+                    title="Remove from my list"
+                    onClick={() => {
+                      remove();
+                    }}
+                  />
                 </div>
               ) : (
                 <div className="hover:text-gray-500 px-1">
