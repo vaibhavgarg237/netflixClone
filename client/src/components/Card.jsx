@@ -10,13 +10,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import axios from "axios";
 
-function Card({ movie, likedMovies }) {
+function Card({ movie, init = false }) {
   const [email, setEmail] = useState(undefined);
 
   const [hover, setHover] = useState(false);
   const { name, image, genres } = movie;
   const navigate = useNavigate();
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(init);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) {
