@@ -91,8 +91,7 @@ export const getUserLikedMovies = createAsyncThunk(
   async (email) => {
     const {
       data: { movies },
-    } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
-    console.log(movies);
+    } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/liked/${email}`);
     return movies;
   }
 );
@@ -102,7 +101,7 @@ export const removeFromList = createAsyncThunk(
   async (email, movieId) => {
     const {
       data: { likedMovies },
-    } = await axios.put(`http://localhost:5000/api/user/remove`, {
+    } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/remove`, {
       email,
       movieId,
     });

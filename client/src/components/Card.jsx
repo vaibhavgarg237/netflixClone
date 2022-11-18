@@ -31,12 +31,11 @@ function Card({ movie, init = false }) {
   const addToList = async () => {
     try {
       await axios
-        .post("http://localhost:5000/api/user/add", {
+        .post(`${process.env.REACT_APP_BACKEND_URL}/add`, {
           email,
           data: movie,
         })
         .then((response) => {
-          // console.log(response);
           if (response?.status === 200 && response.data?.result === 1) {
             setAdded(true);
           }
