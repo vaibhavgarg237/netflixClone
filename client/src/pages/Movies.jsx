@@ -22,7 +22,7 @@ function Movies() {
   }, [reduxStates.genresLoaded, reduxStates.getDataByGenre]);
 
   return (
-    <div className="bg-black overflow-xclip">
+    <div className="bg-black overflow-x-clip">
       <div className="sticky top-0 z-10 mb-10">
         <Navbar isScrolled={true} />
       </div>
