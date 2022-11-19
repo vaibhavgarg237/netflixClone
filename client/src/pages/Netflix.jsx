@@ -55,31 +55,29 @@ function Netflix() {
             alt="Netflix BackgroundImage"
             className="w-screen h-screen brightness-50"
           />
-          <img
-            src={BackgroundImageTitle}
-            alt="homepage title"
-            className="relative bottom-[32rem] left-16"
-          />
+          <div className="absolute top-[15rem] left-16">
+            <img src={BackgroundImageTitle} alt="homepage title" />
 
-          <div className="inline-flex relative bottom-[29rem] left-16 space-x-8 ">
-            <div
-              className="PLAY flex h-12 w-44 bg-[#f0f0f0] hover:bg-[#8c8a8a] justify-center items-center rounded-md space-x-2 cursor-pointer"
-              onClick={() => {
-                navigate("/player");
-              }}
-            >
-              <FaPlay fontSize="1.6rem" />
-              <span>Play</span>
-            </div>
+            <div className="inline-flex space-x-8 mt-8">
+              <div
+                className="PLAY flex h-12 w-44 bg-[#f0f0f0] hover:bg-[#8c8a8a] justify-center items-center rounded-md space-x-2 cursor-pointer"
+                onClick={() => {
+                  navigate("/player");
+                }}
+              >
+                <FaPlay fontSize="1.6rem" />
+                <span>Play</span>
+              </div>
 
-            <div className="MOREINF flex h-12 w-44  bg-slate-500 hover:bg-opacity-50 bg-opacity-70 justify-center items-center rounded-md space-x-2 text-white cursor-pointer">
-              <AiOutlineInfoCircle fontSize="1.8rem" />
-              <span>More Info</span>
+              <div className="MOREINF flex h-12 w-44  bg-slate-500 hover:bg-opacity-50 bg-opacity-70 justify-center items-center rounded-md space-x-2 text-white cursor-pointer">
+                <AiOutlineInfoCircle fontSize="1.8rem" />
+                <span>More Info</span>
+              </div>
             </div>
           </div>
         </div>
       }
-      <div className="absolute top-[46.35rem] bg-black ">
+      <div className="absolut top[46.35rem] relative bottom-[7rem] bg-black">
         <Slider movies={reduxStates.movies} />
       </div>
     </div>
