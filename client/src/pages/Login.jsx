@@ -5,7 +5,7 @@ import { firebaseAuth } from "../utils/firebase-config";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Login() {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
@@ -38,8 +38,8 @@ function Signup() {
     <div>
       <BackgroundImage />
       <Header typePage="sigin" />
-      <div className="absolute top-24 left-0 right-0 mx-auto text-white bg-black h-[32rem] w-96 opacity-90">
-        <div className="CONTENT BOX px-20 py-14 opacity-80">
+      <div className="absolute top-24 left-0 right-0 mx-auto text-white bg-black h-[32rem] w-96 ">
+        <div className="CONTENT BOX px-20 py-14">
           <h1 className=" text-3xl font-[650] mb-4">Sign In</h1>
           <form action="">
             <input
@@ -99,4 +99,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;
