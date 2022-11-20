@@ -20,9 +20,9 @@ function Signup() {
     //show input for email and password
     setPasswd("");
     document.getElementById("inputemail").className =
-      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mt-2 mb-[0.125rem]";
+      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mt-2 mb-[0.125rem] text-black";
     document.getElementById("inputpasswd").className =
-      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mb-2 mb-[0.125rem] ml-[0.125rem]";
+      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mb-2 mb-[0.125rem] ml-[0.125rem] text-black";
   };
 
   const handleChange = (e) => {
