@@ -64,14 +64,17 @@ function Card({ movie, init = false }) {
         <img
           src={`https://image.tmdb.org/t/p/w500${image}`}
           alt="movie background images"
-          className={`-z-40 ${
+          className={`-z-40 transition-opacity delay-200 ${
             hover ? "opacity-0" : ""
           } rounded-[0.45rem] max-w-[15rem] mr-4`}
         />
       }
-
-      {hover && (
-        <div className="z-50 absolute top-[-24.6vh] rounded-sm">
+      {
+        <div
+          className={`z-50 absolute top-[-24.6vh] rounded-sm transition-opacity ease-in-out ${
+            hover ? "" : "opacity-0"
+          }`}
+        >
           <img
             src={`https://image.tmdb.org/t/p/w500${image}`}
             alt="movie background images"
@@ -138,7 +141,7 @@ function Card({ movie, init = false }) {
             </ul>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 }

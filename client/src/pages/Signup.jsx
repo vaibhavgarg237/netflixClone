@@ -12,6 +12,7 @@ function Signup() {
   const [getStarted, setGetStarted] = useState("");
   const [passwd, setPasswd] = useState("none");
   const [formValues, setFormValues] = useState({ email: "", password: "" });
+  const [userErrors, setUserErrors] = useState({ error: false, code: "" });
   let navigate = useNavigate();
 
   const handleGetStarted = (e) => {
@@ -20,9 +21,9 @@ function Signup() {
     //show input for email and password
     setPasswd("");
     document.getElementById("inputemail").className =
-      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mt-2 mb-[0.125rem]";
+      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mt-2 mb-[0.125rem] text-black";
     document.getElementById("inputpasswd").className =
-      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mb-2 mb-[0.125rem] ml-[0.125rem]";
+      "w-[50%] sm:w-[40%] lg:w-[20%] lg:h-12 h-10 pl-4 rounded-sm mb-2 mb-[0.125rem] ml-[0.125rem] text-black";
   };
 
   const handleChange = (e) => {
@@ -32,21 +33,33 @@ function Signup() {
     });
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1) + " !";
+  };
+
   const handleSignUp = async (e) => {
     console.log(formValues);
     createUserWithEmailAndPassword(
       firebaseAuth,
       formValues.email,
       formValues.password
-    ).then((user) => {
-      console.log(user);
-      console.log("After", formValues);
-    });
+    )
+      .then((user) => {
+        console.log(user);
+        console.log("After", formValues);
+      })
+      .catch((error) => {
+        setUserErrors({
+          error: true,
+          code: capitalizeFirstLetter(
+            error.code.replace("auth/", "").replace("-", " ")
+          ),
+        });
+      });
     setFormValues({ email: "", password: "" });
   };
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    console.log(currentUser);
     if (currentUser) {
       navigate("/");
     }
@@ -105,7 +118,11 @@ function Signup() {
             >
               Get Started
             </button>
-
+            {userErrors.error && (
+              <h2 className="text-[#e87c03] rounded-md px-2 py-1 ">
+                {userErrors.code}
+              </h2>
+            )}
             <button
               onClick={handleSignUp}
               style={{ display: passwd }}

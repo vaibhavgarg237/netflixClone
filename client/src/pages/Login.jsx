@@ -5,8 +5,9 @@ import { firebaseAuth } from "../utils/firebase-config";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Login() {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
+  const [userErrors, setUserErrors] = useState({ error: false, code: "" });
   let navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -16,15 +17,36 @@ function Signup() {
     });
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1) + " !";
+  };
+
   const handleSignIn = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(
-      firebaseAuth,
-      formValues.email,
-      formValues.password
-    ).then((user) => {
-      console.log("Login Successful");
-    });
+    try {
+      signInWithEmailAndPassword(
+        firebaseAuth,
+        formValues.email,
+        formValues.password
+      )
+        .then((user) => {
+          console.log("Login Successful", user);
+        })
+        .catch((error) => {
+          setUserErrors({
+            error: true,
+            code: capitalizeFirstLetter(
+              error.code.replace("auth/", "").replace("-", " ")
+            ),
+          });
+          console.log(
+            "Vaibhav can't you take care of these errors? Devs on other side, Big apology from Vaibhav!!",
+            error
+          );
+        });
+    } catch (error) {
+      console.log("Error in login screen", error);
+    }
     // setFormValues({ email: "", password: "" });
   };
 
@@ -39,7 +61,12 @@ function Signup() {
       <BackgroundImage />
       <Header typePage="sigin" />
       <div className="absolute top-24 left-0 right-0 mx-auto text-white bg-black h-[32rem] w-96 opacity-90">
-        <div className="CONTENT BOX px-20 py-14 opacity-80">
+        <div className="CONTENT BOX px-20 py-14">
+          {userErrors.error && (
+            <h2 className="bg-[#e87c03] rounded-md px-2 py-1 ">
+              {userErrors.code}
+            </h2>
+          )}
           <h1 className=" text-3xl font-[650] mb-4">Sign In</h1>
           <form action="">
             <input
@@ -99,4 +126,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;
