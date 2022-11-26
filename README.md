@@ -1,13 +1,20 @@
 # Streaming webapp clone (Netflix)
 
-- Demo: <https://streamingclone.onrender.com/login>
+- Hosted URL: <https://streamingclone.onrender.com>
+- Video demo: https://user-images.githubusercontent.com/67408018/222503701-1cfd08b3-36c0-44ab-b3c5-4ed594488958.mp4
+
+
+
 
 This repo consists of frontend & backend part of my Netflix clone using [The MovieDB Api](https://www.themoviedb.org/documentation/api) for movies & shows details along with **CRUD** functionality for add to list feature. 
 
 ### ***Table of Contents***
-- [Technologies used](#technologies-used)
-- [Runing Project Locally](#user-stories)
-- [License](#technologies-used)
+- [Streaming webapp clone (Netflix)](#streaming-webapp-clone-netflix)
+    - [***Table of Contents***](#table-of-contents)
+    - [***Technologies used***](#technologies-used)
+    - [***User Stories***](#user-stories)
+    - [***Runing Project Locally***](#runing-project-locally)
+    - [**License**](#license)
 
 
 ### ***Technologies used***
