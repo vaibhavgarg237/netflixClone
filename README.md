@@ -6,6 +6,7 @@ This repo consists of frontend & backend part of my Netflix clone using [The Mov
 
 ### ***Table of Contents***
 - [Technologies used](#technologies-used)
+- [User Stories](#user-stories)
 - [Runing Project Locally](#user-stories)
 - [License](#technologies-used)
 
